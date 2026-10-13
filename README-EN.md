@@ -574,6 +574,7 @@ User: "산업안전보건법 별표1 내용"
 | `MCP_ALLOW_UNAUTHENTICATED_REMOTE` | No | `0` | Set to `1` only for a deliberately public, non-loopback deployment without MCP access authentication |
 | `TRUST_PROXY` | No | `false` | Set to a positive proxy-hop count (for example `1` behind one Fly/ingress proxy). Never use `true`/`all` |
 | `ALLOW_QUERY_API_KEY` | No | `1` | Set to `0` to reject the `?oc=` query-string API key (it leaks into proxy access logs) |
+| `ACCESS_LOG` | No | `0` | Set to `1` to log each request. Only `req.path` is recorded, never the query string, so the `oc=` key never reaches the log |
 | `RATE_LIMIT_RPM` | No | 60 | Tool calls per minute per IP. `0` disables only the per-IP limiter; batch and execution limits remain active |
 | `MCP_MAX_BATCH_CALLS` | No | 20 | Maximum `tools/call` items in one JSON-RPC HTTP envelope |
 | `MCP_MAX_BODY_BYTES` | No | 102400 | Maximum incoming JSON request size. The older `MCP_BODY_LIMIT` (`100kb`, etc.) is accepted for compatibility |
