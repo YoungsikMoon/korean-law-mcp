@@ -1107,6 +1107,9 @@ v4.4.0에서 노출 도구를 통폐합했습니다 (컨텍스트 52% 감축). �
 ## HTTP·실행 경계 설정
 
 - HTTP 기본 바인딩은 `MCP_HTTP_HOST=127.0.0.1`, 프록시 신뢰 기본값은 `TRUST_PROXY=false`입니다. 외부 바인딩은 `MCP_AUTH_TOKEN`을 설정해야 하며, 의도적으로 공개할 때만 `MCP_ALLOW_UNAUTHENTICATED_REMOTE=1`을 명시합니다. 프록시 뒤에서는 `TRUST_PROXY=1`처럼 정확한 hop 수를 설정하세요.
+- **브라우저(웹) 클라이언트를 쓸 때는 `ALLOWED_ORIGINS`를 설정하세요.** MCP 명세가 요구하는 Origin 검증(DNS rebinding 방어) 때문에, `Origin` 헤더가 붙은 요청은 `ALLOWED_ORIGINS` 화이트리스트(콤마 구분)에 있는 출처만 통과합니다. 설정하지 않으면 브라우저 요청은 모두 차단되고 시작 시 안내가 출력됩니다. `CORS_ORIGIN`을 따로 설정한 경우 그 값도 허용 목록에 추가됩니다.
+- `ALLOW_QUERY_API_KEY=0`이면 URL 쿼리(`?oc=키`)로는 API 키를 전달할 수 없습니다. 쿼리 키는 프록시/엣지 액세스 로그에 평문으로 남으므로 폐쇄망이나 로그 수집 환경에서 권장합니다. 헤더(`apikey`·`law_oc` 등) 전달은 계속 동작합니다.
+- `ACCESS_LOG=1`이면 요청 로그를 기록합니다. 쿼리스트링의 `oc=` API 키 유출을 막기 위해 경로만 기록합니다.
 - `RATE_LIMIT_RPM=0`은 IP별 제한만 끕니다. `MCP_MAX_BATCH_CALLS`(기본 20), 요청 본문, upstream 시도/응답 본문, 도구 응답 제한은 계속 적용됩니다.
 - `MCP_MAX_BODY_BYTES`, `MCP_MAX_UPSTREAM_REQUESTS`(기본 48), `MCP_MAX_UPSTREAM_BODY_BYTES`, `MCP_MAX_TOTAL_UPSTREAM_BODY_BYTES`, `MCP_MAX_TOOL_RESPONSE_CHARS`는 시작 시 정수로 검증되며 잘못된 값은 서버 시작을 실패시킵니다. 기존 `MCP_BODY_LIMIT=100kb`도 호환됩니다.
 - `get_batch_articles`는 최대 20개 법령·총 100개 조문으로 제한됩니다. HTTP 연결 종료 또는 MCP 취소는 fetch, 재시도 대기, 응답 본문 읽기까지 전파됩니다. JSON-RPC 배치 항목은 예산만 공유하고 취소 신호는 서로 분리됩니다.

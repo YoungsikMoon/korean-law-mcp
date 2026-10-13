@@ -55,9 +55,13 @@ function verifyExportTargets(value, label = "exports") {
 }
 
 function packedFiles() {
-  const result = spawnSync("npm", ["pack", "--dry-run", "--json", "--ignore-scripts"], {
+  // Windows에서는 npm이 .cmd 심링크라 shell 없이 spawnSync("npm", ...)하면
+  // ENOENT/EINVAL로 실패한다. 인자는 정적 리터럴이므로 shell 문자열로 합쳐
+  // 실행해도 명령어 인젝션 면이 없다(DEP0190 회피: args 배열 대신 단일 문자열).
+  const result = spawnSync("npm pack --dry-run --json --ignore-scripts", {
     cwd: root,
     encoding: "utf8",
+    shell: true,
   })
   if (result.status !== 0) {
     throw new Error(`npm pack --dry-run failed:\n${result.stderr || result.stdout}`)
