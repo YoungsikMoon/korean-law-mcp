@@ -35,6 +35,12 @@ If this saves you time, a GitHub ⭐ helps others find it.
 
 ---
 
+## v4.15.9: Labor administration decisions
+
+- `search_decisions` and `get_decision_text` add Ministry of Employment and Labor interpretations (`moel`), Industrial Accident Compensation Insurance review decisions (`iaciac`) and Employment Insurance review decisions (`eiac`). Contributed by @adfakdjk332 (#175). [Changelog](CHANGELOG.md)
+
+---
+
 ## v4.15.8: Addenda lookup
 
 - `get_law_text(mst, jo="부칙")` returns the addenda (effective dates, transitional provisions), newest first — e.g. the Constitution's addendum Articles 1–6. The table of contents and full text now end with the addenda count. [Changelog](CHANGELOG.md)
