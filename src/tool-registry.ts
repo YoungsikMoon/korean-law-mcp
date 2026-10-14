@@ -101,7 +101,7 @@ export const allTools: McpTool[] = [
   },
   {
     name: "get_law_text",
-    description: "[법령조회] 조문 전문 조회. mst/lawId 필수, jo로 특정 조문만 가능 — jo는 '제148조의2' 같은 자연어 조문 표기를 그대로 받는다(권장). 6자리 JO 코드를 직접 쓰려면 조번호 4자리 zero-pad + 의X 2자리: 제10조의2→001002, 제234조의2→023402(234002 아님). 과거 시점 본문은 efYd 에 그 날짜를 넣으면 그날 시행 중이던 버전으로 자동 보정한다(제명이 바뀌기 전 버전 포함). 적용 법령 판단·경과조치까지 필요하면 legal_analysis(mode=applicable_law).",
+    description: "[법령조회] 조문 전문 조회. mst/lawId 필수, jo로 특정 조문만 가능 — jo는 '제148조의2' 같은 자연어 조문 표기를 그대로 받는다(권장). 6자리 JO 코드를 직접 쓰려면 조번호 4자리 zero-pad + 의X 2자리: 제10조의2→001002, 제234조의2→023402(234002 아님). jo='부칙' 이면 부칙 원문(시행일·경과조치, 최근 공포부터). 과거 시점 본문은 efYd 에 그 날짜를 넣으면 그날 시행 중이던 버전으로 자동 보정한다(제명이 바뀌기 전 버전 포함). 적용 법령 판단·경과조치까지 필요하면 legal_analysis(mode=applicable_law).",
     schema: GetLawTextSchema,
     handler: getLawText
   },

@@ -35,6 +35,12 @@ If this saves you time, a GitHub ⭐ helps others find it.
 
 ---
 
+## v4.15.8: Addenda lookup
+
+- `get_law_text(mst, jo="부칙")` returns the addenda (effective dates, transitional provisions), newest first — e.g. the Constitution's addendum Articles 1–6. The table of contents and full text now end with the addenda count. [Changelog](CHANGELOG.md)
+
+---
+
 ## v4.15.7: Month-end dates and eight-digit case numbers
 
 - Fixed `지난달`, `N개월 전`, and `최근 N개월` selecting the wrong month at month end (on March 30, "지난달" now means February)
