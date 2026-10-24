@@ -37,15 +37,15 @@
 
 ## 최근 업데이트
 
-현재 버전 **v4.15.9**. 수치는 모두 [CHANGELOG](CHANGELOG.md)의 실측 기록에서 옮김.
+현재 버전 **v4.15.10**. 수치는 모두 [CHANGELOG](CHANGELOG.md)의 실측 기록에서 옮김.
 
 | 버전 | 주요 변경 | 변화 |
 |------|-----------|------|
+| 4.15.10 | 국세청 법령해석 본문 조회: 검색 결과의 `본문조회ID(ntstDcmId)`로 `get_decision_text(domain="nts")` — 요지·회신·본문 (#178) | 목록·링크만 → 본문까지 |
 | 4.15.9 | 노동 행정 결정례 3종 추가: 고용노동부 질의회시(`moel`)·산재보험재심사(`iaciac`)·고용보험심사(`eiac`). 기여 @adfakdjk332 (#175) | 새로 닿는 자료 9,636건·934건·118건 |
 | 4.15.8 | `get_law_text(mst, jo="부칙")`로 부칙 원문(시행일·경과조치) 조회 | 부칙 조회 불가 → 가능 (민법 부칙 37건) |
 | 4.15.7 | 월말 `지난달`·`N개월 전` 오검색, 8자리 사건번호 인용 검증 누락·9자리 번호 잘림 수정 (#169·#170) | 이슈 2건 해결 |
 | 4.15.6 | 판례 `search="both"`: 판례명·본문검색 병행, 중복 제거 (#167) | "학원강사 근로자" 판례명 1건 · 본문 70건 |
-| 4.15.5 | 조회·검증 경계 전체 재검수 ([검수 기록](docs/PRODUCTION-REVIEW-3-2026-10-02.md)) | 수정 10항목, 기능·의존성 변경 없음 |
 
 이전 버전 전체 내역은 [CHANGELOG.md](CHANGELOG.md) 참조. 대표 이정표:
 
@@ -273,13 +273,13 @@ $env:LAW_API_PROTOCOL="http"       # Windows PowerShell
 
 ### 국세청 판례 서버 TLS/프록시 설정
 
-국세청 출처 판례 본문은 법제처 JSON 응답에 없을 때 `taxlaw.nts.go.kr`을 추가 조회합니다. 이 서버는 HTTP로 접근해도 HTTPS로 리다이렉트되므로, `LAW_API_PROTOCOL=http`와 별개로 Node.js 런타임이 `https://taxlaw.nts.go.kr` 인증서를 신뢰해야 합니다. 사내망·폐쇄망·SSL inspection 프록시 뒤에서는 브라우저로는 열려도 Node.js `fetch()`만 `[EXTERNAL_API_ERROR] fetch failed`로 실패할 수 있습니다(인증서 저장소·프록시 설정이 다름). 먼저 Node.js 기준으로 연결을 확인하세요:
+국세청 출처 판례 본문은 법제처 JSON 응답에 없을 때, 국세청 법령해석(`nts`) 본문은 항상 `taxlaw.nts.go.kr`을 조회합니다. 이 서버는 HTTP로 접근해도 HTTPS로 리다이렉트되므로, `LAW_API_PROTOCOL=http`와 별개로 Node.js 런타임이 `https://taxlaw.nts.go.kr` 인증서를 신뢰해야 합니다. 사내망·폐쇄망·SSL inspection 프록시 뒤에서는 브라우저로는 열려도 Node.js `fetch()`만 `[EXTERNAL_API_ERROR] fetch failed`로 실패할 수 있습니다(인증서 저장소·프록시 설정이 다름). 먼저 Node.js 기준으로 연결을 확인하세요:
 
 ```bash
 node -e "fetch('https://taxlaw.nts.go.kr/qt/USEQTA002P.do?ntstDcmId=200000000000019303').then(r=>console.log(r.status,r.url)).catch(e=>console.error(e.name,e.message,e.cause))"
 ```
 
-별도 웹 프록시를 거쳐야 한다면 프록시 주소를 설정합니다(국세청 판례 본문 fallback의 외부 HTTPS 연결에 적용). Windows 시스템 환경변수는 관리자 권한 터미널에서 `setx`로 등록하고, 적용 후 Windows 또는 Node.js 프로세스를 재시작하세요:
+별도 웹 프록시를 거쳐야 한다면 프록시 주소를 설정합니다(국세청 판례 본문 fallback·국세청 법령해석 본문의 외부 HTTPS 연결에 적용). Windows 시스템 환경변수는 관리자 권한 터미널에서 `setx`로 등록하고, 적용 후 Windows 또는 Node.js 프로세스를 재시작하세요:
 
 ```env
 LAW_EXTERNAL_HTTPS_PROXY=http://proxy-host:8080

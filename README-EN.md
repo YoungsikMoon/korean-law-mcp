@@ -38,15 +38,15 @@ If this saves you time, a GitHub ⭐ helps others find it.
 
 ## Recent updates
 
-Current version **v4.15.9**. All numbers come from the measurements recorded in the [CHANGELOG](CHANGELOG.md).
+Current version **v4.15.10**. All numbers come from the measurements recorded in the [CHANGELOG](CHANGELOG.md).
 
 | Version | Main change | Measured change |
 |---------|-------------|-----------------|
+| 4.15.10 | National Tax Service interpretation full text: pass the `본문조회ID(ntstDcmId)` from search to `get_decision_text(domain="nts")` — summary, reply and body (#178) | List and link only → full text |
 | 4.15.9 | Three labor-administration decision domains: Ministry of Employment and Labor interpretations (`moel`), Industrial Accident Compensation Insurance review (`iaciac`), Employment Insurance review (`eiac`). Contributed by @adfakdjk332 (#175) | Newly reachable: 9,636 · 934 · 118 records |
 | 4.15.8 | `get_law_text(mst, jo="부칙")` returns the addenda (effective dates, transitional provisions) | Addenda unavailable → available (37 addenda for the Civil Act) |
 | 4.15.7 | Fixed month-end `지난달`/`N개월 전` picking the wrong month, 8-digit case numbers skipped in citation checks, and 9-digit numbers truncated into another case (#169, #170) | 2 issues fixed |
 | 4.15.6 | Precedent `search="both"`: title and full-text search together, deduplicated (#167) | "학원강사 근로자": 1 title hit · 70 full-text hits |
-| 4.15.5 | Full re-review of retrieval and verification boundaries ([review evidence](docs/PRODUCTION-REVIEW-3-2026-10-02.md)) | 10 fixes, no feature or dependency changes |
 
 Earlier versions: see [CHANGELOG.md](CHANGELOG.md). Milestones:
 
@@ -262,7 +262,7 @@ $env:LAW_API_PROTOCOL="http"       # Windows PowerShell
 
 ### National Tax Service precedent server: TLS / proxy
 
-When a National Tax Service precedent body is missing from the 법제처 JSON response, the server also queries `taxlaw.nts.go.kr`. That server redirects HTTP to HTTPS, so regardless of `LAW_API_PROTOCOL=http` the Node.js runtime must trust the `https://taxlaw.nts.go.kr` certificate. Behind corporate networks, firewalls or SSL-inspection proxies the page may open in a browser while Node.js `fetch()` fails with `[EXTERNAL_API_ERROR] fetch failed` (different certificate store and proxy settings). Check the connection from Node.js first:
+When a National Tax Service precedent body is missing from the 법제처 JSON response, and always for National Tax Service interpretation (`nts`) bodies, the server queries `taxlaw.nts.go.kr`. That server redirects HTTP to HTTPS, so regardless of `LAW_API_PROTOCOL=http` the Node.js runtime must trust the `https://taxlaw.nts.go.kr` certificate. Behind corporate networks, firewalls or SSL-inspection proxies the page may open in a browser while Node.js `fetch()` fails with `[EXTERNAL_API_ERROR] fetch failed` (different certificate store and proxy settings). Check the connection from Node.js first:
 
 ```bash
 node -e "fetch('https://taxlaw.nts.go.kr/qt/USEQTA002P.do?ntstDcmId=200000000000019303').then(r=>console.log(r.status,r.url)).catch(e=>console.error(e.name,e.message,e.cause))"

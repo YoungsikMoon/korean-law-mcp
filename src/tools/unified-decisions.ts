@@ -245,7 +245,7 @@ export async function searchDecisions(
 
 export const GetDecisionTextSchema = z.object({
   domain: z.enum(DOMAINS).describe("도메인 선택 (enum 값 참조)"),
-  id: z.string().describe("일련번호/ID (search 결과에서 획득)"),
+  id: z.string().describe("일련번호/ID (search 결과에서 획득. nts는 본문조회ID(ntstDcmId))"),
   full: z.boolean().optional().describe("true=본문 전문 그대로. 미지정=이유/전문 섹션 계단식 축약 (판시·요지·주문은 항상 full)"),
   options: z.record(z.string(), z.unknown()).optional().describe(
     "도메인별 옵션. treaty:{chrClsCd:'010202'(한)/'010203'(영)} english_law:{mst,lawName} prec/constitutional/admin_appeal/interpretation:{caseName}"
