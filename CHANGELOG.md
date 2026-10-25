@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.15.13] - 2026-10-25
+
+### Changed
+
+- Claude Code 플러그인(`.claude-plugin/plugin.json`)의 MCP 서버를 로컬 `npx korean-law-mcp@X.Y.Z` 에서 공개 서버 `https://mcp.gomdori.app/law`(type http)로 바꿨다. Claude 플러그인 디렉터리가 4.15.10·4.15.12 를 "고정 npx 실행·lockfile 설치" 사유로 정책 보류했고, 원격 연결이면 두 사유가 없다. 같은 주소를 MCP 커넥터로도 제출했다
+  - 키는 `apikey: ${user_config.api_key}` 헤더로 보낸다. `api_key` 는 선택(기본 빈 값)이고 비우면 공용 한도로 동작한다
+  - 실측(claude -p --plugin-dir): 키 설정 없이 search_law → get_law_text 정상. 같은 주소의 claude.ai 커넥터가 이미 있으면 Claude Code 가 플러그인 쪽 서버를 중복으로 보고 띄우지 않는다(도구는 한 벌만 보임)
+  - `privacyPolicyUrl`(https://pubax.org/law/privacy/) 추가. `verify:package` 는 npx 고정 대신 원격 주소를 확인한다
+  - 로컬 설치(`npx korean-law-mcp setup`)는 그대로다
+
 ## [4.15.12] - 2026-10-25
 
 ### Changed

@@ -42,15 +42,15 @@ If this saves you time, a GitHub ⭐ helps others find it.
 
 ## Recent updates
 
-Current version **v4.15.12**. All numbers come from the measurements recorded in the [CHANGELOG](CHANGELOG.md).
+Current version **v4.15.13**. All numbers come from the measurements recorded in the [CHANGELOG](CHANGELOG.md).
 
 | Version | Main change | Measured change |
 |---------|-------------|-----------------|
+| 4.15.13 | The Claude Code plugin connects to the hosted server (`mcp.gomdori.app/law`) instead of running npx; the key is optional | Nothing to install |
 | 4.15.12 | Cross-tool hints (e.g. `search_law_bulk` for watching many laws) moved from tool descriptions to the server `instructions` | Same tool choices on 4 test questions |
 | 4.15.11 | Human-readable titles (`title` and `annotations.title`) on all 10 exposed tools, shown in client approval prompts | Titles 0 → 10 |
 | 4.15.10 | National Tax Service interpretation full text: pass the `본문조회ID(ntstDcmId)` from search to `get_decision_text(domain="nts")` — summary, reply and body (#178) | List and link only → full text |
 | 4.15.9 | Three labor-administration decision domains: Ministry of Employment and Labor interpretations (`moel`), Industrial Accident Compensation Insurance review (`iaciac`), Employment Insurance review (`eiac`). Contributed by @adfakdjk332 (#175) | Newly reachable: 9,636 · 934 · 118 records |
-| 4.15.8 | `get_law_text(mst, jo="부칙")` returns the addenda (effective dates, transitional provisions) | Addenda unavailable → available (37 addenda for the Civil Act) |
 
 Earlier versions: see [CHANGELOG.md](CHANGELOG.md). Milestones:
 
@@ -75,11 +75,11 @@ Listed on the official MCP Registry: [`io.github.chrisryugj/korean-law-mcp`](htt
 
 ### Step 0: Get an API key (free, 1 minute)
 
-Every option needs a **법제처 Open API key (OC)**. Go to the [법제처 Open API page](https://open.law.go.kr/LSO/openApi/guideList.do) → sign up and log in → **"Open API 사용 신청"** (apply) → fill in the form and you get a key (e.g. `honggildong`). Use that key in the configs below.
+Get a **법제처 Open API key (OC)** first. Local installs need it; options that use the hosted server also work without one on a shared quota. Go to the [법제처 Open API page](https://open.law.go.kr/LSO/openApi/guideList.do) → sign up and log in → **"Open API 사용 신청"** (apply) → fill in the form and you get a key (e.g. `honggildong`). Use that key in the configs below.
 
 ### Option 1: Claude Code plugin (easiest)
 
-If you use [Claude Code](https://claude.com/claude-code), two lines are enough. The plugin asks for your API key during install and stores it as sensitive data.
+If you use [Claude Code](https://claude.com/claude-code), two lines are enough. The plugin asks for your API key during install and stores it as sensitive data; leave it empty to use the shared quota.
 
 ```
 /plugin marketplace add chrisryugj/korean-law-mcp
@@ -92,7 +92,7 @@ Then just ask in natural language (`"근로기준법 제74조 알려줘"`, `"민
 /plugin marketplace update korean-law-marketplace
 ```
 
-> Internally it runs `npx --ignore-scripts --omit=optional korean-law-mcp@<plugin version>`. The plugin pins an npm release, so new versions arrive through the update command above; optional OCR/ML/native dependencies and install scripts are skipped.
+> The plugin connects to the hosted server `https://mcp.gomdori.app/law` (nothing is installed on your machine) and sends your key in the `apikey` header. To avoid the hosted server, use the local install below.
 
 #### Troubleshooting: `Permission denied (publickey)`
 
@@ -465,7 +465,7 @@ MCP_HTTP_HOST=0.0.0.0 TRUST_PROXY=1 MCP_AUTH_TOKEN=replace-with-a-secret \
 
 ### Dependency and install boundary
 
-`kordoc` remains because annex parsing is a reachable server feature. Its known-good pure-JS `pdfjs-dist@4.10.38` runtime is pinned as a normal dependency; optional OCR/ML/native helpers are not needed by this server. Plugin, documented, and Docker installs use `--omit=optional --ignore-scripts`. CI and publishing retain optional development-tool bindings with scripts disabled during validation, then prune to the production graph and run the PDF annex smoke test. Scanner reports for transitive HTTP-framework packages should be evaluated against the reachable server path rather than treated as proof that the server exposes the affected middleware.
+`kordoc` remains because annex parsing is a reachable server feature. Its known-good pure-JS `pdfjs-dist@4.10.38` runtime is pinned as a normal dependency; optional OCR/ML/native helpers are not needed by this server. Documented and Docker installs use `--omit=optional --ignore-scripts`. CI and publishing retain optional development-tool bindings with scripts disabled during validation, then prune to the production graph and run the PDF annex smoke test. Scanner reports for transitive HTTP-framework packages should be evaluated against the reachable server path rather than treated as proof that the server exposes the affected middleware.
 
 ---
 

@@ -41,15 +41,15 @@ VS Code·Cursor는 버튼 한 번으로 연결됩니다(키 없이 공용 한도
 
 ## 최근 업데이트
 
-현재 버전 **v4.15.12**. 수치는 모두 [CHANGELOG](CHANGELOG.md)의 실측 기록에서 옮김.
+현재 버전 **v4.15.13**. 수치는 모두 [CHANGELOG](CHANGELOG.md)의 실측 기록에서 옮김.
 
 | 버전 | 주요 변경 | 변화 |
 |------|-----------|------|
+| 4.15.13 | Claude Code 플러그인이 로컬 npx 대신 공개 서버(`mcp.gomdori.app/law`)에 연결, 키는 선택 | 설치 없음 |
 | 4.15.12 | 도구 사이 안내(예: 여러 법령 감시는 `search_law_bulk`)를 도구 설명에서 서버 안내문(`instructions`)으로 옮김 | 같은 질문 4개에서 고르는 도구 동일 |
 | 4.15.11 | 노출 도구 10개에 사람용 제목(`title`·`annotations.title`) 추가: 클라이언트 승인 창에 "법령 검색"처럼 표시 | 제목 0개 → 10개 |
 | 4.15.10 | 국세청 법령해석 본문 조회: 검색 결과의 `본문조회ID(ntstDcmId)`로 `get_decision_text(domain="nts")` — 요지·회신·본문 (#178) | 목록·링크만 → 본문까지 |
 | 4.15.9 | 노동 행정 결정례 3종 추가: 고용노동부 질의회시(`moel`)·산재보험재심사(`iaciac`)·고용보험심사(`eiac`). 기여 @adfakdjk332 (#175) | 새로 닿는 자료 9,636건·934건·118건 |
-| 4.15.8 | `get_law_text(mst, jo="부칙")`로 부칙 원문(시행일·경과조치) 조회 | 부칙 조회 불가 → 가능 (민법 부칙 37건) |
 
 이전 버전 전체 내역은 [CHANGELOG.md](CHANGELOG.md) 참조. 대표 이정표:
 
@@ -74,7 +74,7 @@ VS Code·Cursor는 버튼 한 번으로 연결됩니다(키 없이 공용 한도
 
 ### 0단계: API 키 발급 (무료, 1분)
 
-모든 방법에 공통으로 필요한 **법제처 Open API 인증키(OC)**를 먼저 발급받으세요.
+**법제처 Open API 인증키(OC)**를 먼저 발급받으세요. 로컬 설치(방법 4·5)는 키가 꼭 있어야 하고, 공개 서버를 쓰는 방법(1~3)은 키 없이도 공용 한도로 동작합니다.
 
 [법제처 Open API 신청 페이지](https://open.law.go.kr/LSO/openApi/guideList.do) 접속 → 회원가입·로그인 → **"Open API 사용 신청"** → 신청서 작성 시 **인증키(OC)** 발급 (예: `honggildong`). 이 인증키를 아래 설정에서 사용.
 
@@ -87,13 +87,13 @@ VS Code·Cursor는 버튼 한 번으로 연결됩니다(키 없이 공용 한도
 /plugin install korean-law@korean-law-marketplace
 ```
 
-설치 중 **법제처 API 키**를 입력하라는 프롬프트가 뜹니다 (0단계에서 발급받은 `honggildong` 같은 키). 민감정보로 안전하게 저장됩니다. 이후 Claude Code에 자연어로 질문하면(`"근로기준법 제74조 알려줘"`, `"민법 제750조 판례 검증해줘"`) `korean-law` MCP 도구가 자동 호출됩니다. 새 버전은 한 줄로 최신화:
+설치 중 **법제처 API 키**를 묻습니다 (0단계에서 발급받은 `honggildong` 같은 키, 민감정보로 저장). 비워 두면 공용 한도로 동작합니다. 이후 Claude Code에 자연어로 질문하면(`"근로기준법 제74조 알려줘"`, `"민법 제750조 판례 검증해줘"`) `korean-law` MCP 도구가 자동 호출됩니다. 새 버전은 한 줄로 최신화:
 
 ```
 /plugin marketplace update korean-law-marketplace
 ```
 
-> 내부적으로 `npx --ignore-scripts --omit=optional korean-law-mcp@<플러그인 버전>`을 실행합니다. 플러그인 버전에 고정된 npm 배포본을 쓰므로 새 버전은 위 업데이트 명령으로 받고, 선택적 OCR·ML·네이티브 의존성은 설치하지 않으며 설치 스크립트도 실행하지 않습니다.
+> 플러그인은 공개 서버 `https://mcp.gomdori.app/law` 에 연결합니다(내 컴퓨터에 아무것도 설치하지 않음). 키는 `apikey` 헤더로 보냅니다. 서버를 거치지 않으려면 [방법 4](#방법-4-내-컴퓨터에-직접-설치-오프라인-가능)의 로컬 설치를 쓰세요.
 
 #### Troubleshooting: `Permission denied (publickey)` 에러
 
