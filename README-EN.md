@@ -42,15 +42,15 @@ If this saves you time, a GitHub ⭐ helps others find it.
 
 ## Recent updates
 
-Current version **v4.15.11**. All numbers come from the measurements recorded in the [CHANGELOG](CHANGELOG.md).
+Current version **v4.15.12**. All numbers come from the measurements recorded in the [CHANGELOG](CHANGELOG.md).
 
 | Version | Main change | Measured change |
 |---------|-------------|-----------------|
+| 4.15.12 | Cross-tool hints (e.g. `search_law_bulk` for watching many laws) moved from tool descriptions to the server `instructions` | Same tool choices on 4 test questions |
 | 4.15.11 | Human-readable titles (`title` and `annotations.title`) on all 10 exposed tools, shown in client approval prompts | Titles 0 → 10 |
 | 4.15.10 | National Tax Service interpretation full text: pass the `본문조회ID(ntstDcmId)` from search to `get_decision_text(domain="nts")` — summary, reply and body (#178) | List and link only → full text |
 | 4.15.9 | Three labor-administration decision domains: Ministry of Employment and Labor interpretations (`moel`), Industrial Accident Compensation Insurance review (`iaciac`), Employment Insurance review (`eiac`). Contributed by @adfakdjk332 (#175) | Newly reachable: 9,636 · 934 · 118 records |
 | 4.15.8 | `get_law_text(mst, jo="부칙")` returns the addenda (effective dates, transitional provisions) | Addenda unavailable → available (37 addenda for the Civil Act) |
-| 4.15.7 | Fixed month-end `지난달`/`N개월 전` picking the wrong month, 8-digit case numbers skipped in citation checks, and 9-digit numbers truncated into another case (#169, #170) | 2 issues fixed |
 
 Earlier versions: see [CHANGELOG.md](CHANGELOG.md). Milestones:
 

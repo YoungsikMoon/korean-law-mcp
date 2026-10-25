@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.15.12] - 2026-10-25
+
+### Changed
+
+- 도구 설명·인자 설명에서 다른 도구를 부르는 안내를 뺐다(Claude 커넥터 디렉터리 정책: 도구 설명에 다른 도구·모델 동작 지시 금지). 빠진 안내 6곳(`search_law_bulk`·`applicable_law`·`legal_research` 사용 조건·`discover_tools`→`execute_tool` 순서·`search_law` 식별자 획득·`search_ordinance` 일련번호)은 initialize 의 `instructions`(`lib/tool-profiles` 의 `SERVER_INSTRUCTIONS`)로 옮겼다
+  - `tool-registry.gate.test.ts` 가 노출 도구 설명·인자 설명에 다른 도구 이름이 들어가면 막는다(자기 enum 값은 예외)
+  - 전후 비교(claude -p, 같은 질문 4개: 조문 조회·행위시법·여러 법령 개정 확인·조세심판 결정례): 고르는 도구와 순서가 같았고, 4.15.12 가 두 질문에서 호출 1회 적었다
+
 ## [4.15.11] - 2026-10-25
 
 ### Added
