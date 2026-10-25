@@ -100,3 +100,18 @@ describe("registerTools 게이트 배선", () => {
     expect(second).toEqual(first)
   })
 })
+
+describe("tools/list 도구 제목", () => {
+  it("노출 도구마다 title 과 annotations.title 이 있다 (Claude 커넥터 디렉터리 요건)", async () => {
+    const client = await connect({})
+    const { tools } = await client.listTools()
+    const titles = tools.map(t => t.title)
+    expect(tools.length).toBeGreaterThan(0)
+    for (const t of tools) {
+      expect(t.title, t.name).toBeTruthy()
+      expect(t.annotations?.title, t.name).toBe(t.title)
+      expect(t.annotations?.readOnlyHint, t.name).toBe(true)
+    }
+    expect(new Set(titles).size).toBe(titles.length)
+  })
+})

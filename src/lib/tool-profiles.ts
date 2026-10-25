@@ -29,6 +29,23 @@ export const V3_EXPOSED = new Set([
 ])
 
 /**
+ * 노출 도구의 사람용 제목 — tools/list 의 title·annotations.title 로 나간다.
+ * Claude 커넥터 디렉터리는 모든 도구에 title 을 요구한다(gate test 가 빠진 도구를 잡는다).
+ */
+export const TOOL_TITLES: Record<string, string> = {
+  legal_research: "법령 종합 리서치",
+  legal_analysis: "인용 검증·법령 분석",
+  search_law: "법령 검색",
+  get_law_text: "법령 조문 조회",
+  get_annexes: "별표·서식 조회",
+  search_decisions: "판례·결정례 검색",
+  get_decision_text: "판례·결정례 본문 조회",
+  ordinance_radar: "조례 정비 레이더",
+  discover_tools: "전문 도구 찾기",
+  execute_tool: "전문 도구 실행",
+}
+
+/**
  * discover_tools 말미 안내 — 돌려준 도구가 무엇인지에 따라 갈린다.
  *
  * 결과와 무관하게 "execute_tool로 실행하세요"만 말하면, 1-hop 진입점을 앞세운

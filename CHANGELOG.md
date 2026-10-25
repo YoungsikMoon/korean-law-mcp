@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.15.11] - 2026-10-25
+
+### Added
+
+- 노출 도구 10개에 사람용 제목을 붙였다: tools/list 의 `title` 과 `annotations.title`(예: `search_law` → "법령 검색", `legal_analysis` → "인용 검증·법령 분석"). Claude 커넥터 디렉터리가 모든 도구에 제목을 요구한다. 목록은 `lib/tool-profiles` 의 `TOOL_TITLES` 한 곳에 두고, 빠진 도구는 `tool-registry.gate.test.ts` 가 잡는다
+- 공개 서버 개인정보처리방침: https://pubax.org/law/privacy/
+
 ## [4.15.10] - 2026-10-24
 
 ### Added

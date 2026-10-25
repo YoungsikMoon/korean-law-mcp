@@ -14,7 +14,7 @@ import { RequestExecutionBudget, readExecutionLimits, type ExecutionLimits } fro
 import { truncateResponse } from "./lib/schemas.js"
 import { getRequestSignal, requestContext, runWithRequestContext, throwIfRequestCancelled } from "./lib/session-state.js"
 import { discoverTools, DiscoverToolsSchema, executeTool, ExecuteToolSchema, setAllToolsRef } from "./tools/meta-tools.js"
-import { V3_EXPOSED } from "./lib/tool-profiles.js"
+import { V3_EXPOSED, TOOL_TITLES } from "./lib/tool-profiles.js"
 import { searchDecisions, SearchDecisionsSchema, getDecisionText, GetDecisionTextSchema } from "./tools/unified-decisions.js"
 
 // Tool imports
@@ -813,9 +813,11 @@ function listTools() {
   listToolsResult ??= {
     tools: exposedTools.map(tool => ({
       name: tool.name,
+      title: TOOL_TITLES[tool.name],
       description: `${SERVICE_NAME} — ${tool.description}`,
       inputSchema: toMcpInputSchema(tool.schema),
       annotations: {
+        title: TOOL_TITLES[tool.name],
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
