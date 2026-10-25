@@ -21,6 +21,10 @@
 
 **바로 쓰기:** Claude.ai 커넥터에 `https://mcp.gomdori.app/law?oc=본인키` 한 줄, Claude Code는 플러그인 두 줄 → [설치 및 사용법](#설치-및-사용법)
 
+VS Code·Cursor는 버튼 한 번으로 연결됩니다(키 없이 공용 한도로 동작, 본인 키는 주소 끝에 `?oc=본인키`).
+
+[![VS Code에 설치](https://img.shields.io/badge/VS_Code-법령MCP_연결-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=korean-law&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.gomdori.app%2Flaw%22%7D) [![Cursor에 설치](https://img.shields.io/badge/Cursor-법령MCP_연결-000000?style=flat-square&logo=cursor&logoColor=white)](https://cursor.com/en/install-mcp?name=korean-law&config=eyJ1cmwiOiJodHRwczovL21jcC5nb21kb3JpLmFwcC9sYXcifQ%3D%3D)
+
 쓸모 있었다면 GitHub ⭐ 하나 눌러주세요. 다른 사람이 이 도구를 찾는 데 도움이 됩니다.
 
 [![국가법령정보 MCP 활용하기 — 영상 보기](./docs/video-intro.jpg)](https://youtu.be/gmkuOqIV3dc)

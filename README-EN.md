@@ -22,6 +22,10 @@
 
 **Start in one line:** add `https://mcp.gomdori.app/law?oc=YOUR_KEY` as a custom connector in Claude.ai, or run `npx --ignore-scripts --omit=optional korean-law-mcp setup` → [Quick Start](#quick-start)
 
+One-click install for VS Code and Cursor (works without a key on a shared quota; add `?oc=YOUR_KEY` to the URL for your own):
+
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_korean--law-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=korean-law&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.gomdori.app%2Flaw%22%7D) [![Install in Cursor](https://img.shields.io/badge/Cursor-Install_korean--law-000000?style=flat-square&logo=cursor&logoColor=white)](https://cursor.com/en/install-mcp?name=korean-law&config=eyJ1cmwiOiJodHRwczovL21jcC5nb21kb3JpLmFwcC9sYXcifQ%3D%3D)
+
 If this saves you time, a GitHub ⭐ helps others find it.
 
 [![Korean Law MCP — watch the demo](./docs/video-intro.jpg)](https://youtu.be/gmkuOqIV3dc)
