@@ -42,15 +42,15 @@ If this saves you time, a GitHub ⭐ helps others find it.
 
 ## Recent updates
 
-Current version **v4.15.13**. All numbers come from the measurements recorded in the [CHANGELOG](CHANGELOG.md).
+Current version **v4.15.14**. All numbers come from the measurements recorded in the [CHANGELOG](CHANGELOG.md).
 
 | Version | Main change | Measured change |
 |---------|-------------|-----------------|
+| 4.15.14 | Security: dependency vulnerabilities cleared — kordoc 4.24.8 (zod 4) underneath, zod 4.6.7, patched dev tools and transitive dependencies | `npm audit` 10 → **0** |
 | 4.15.13 | The Claude Code plugin connects to the hosted server (`mcp.gomdori.app/law`) instead of running npx; the key is optional | Nothing to install |
 | 4.15.12 | Cross-tool hints (e.g. `search_law_bulk` for watching many laws) moved from tool descriptions to the server `instructions` | Same tool choices on 4 test questions |
 | 4.15.11 | Human-readable titles (`title` and `annotations.title`) on all 10 exposed tools, shown in client approval prompts | Titles 0 → 10 |
 | 4.15.10 | National Tax Service interpretation full text: pass the `본문조회ID(ntstDcmId)` from search to `get_decision_text(domain="nts")` — summary, reply and body (#178) | List and link only → full text |
-| 4.15.9 | Three labor-administration decision domains: Ministry of Employment and Labor interpretations (`moel`), Industrial Accident Compensation Insurance review (`iaciac`), Employment Insurance review (`eiac`). Contributed by @adfakdjk332 (#175) | Newly reachable: 9,636 · 934 · 118 records |
 
 Earlier versions: see [CHANGELOG.md](CHANGELOG.md). Milestones:
 

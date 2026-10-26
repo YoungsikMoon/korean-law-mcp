@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.15.14] - 2026-10-26
+
+### Security
+
+- 알려진 의존성 취약점 10건(high 5·moderate 5)을 0건으로. 외부 보안 점검에서 "하위 패키지 kordoc 이 zod 3.25.76(고위험)을 쓴다"는 지적을 받았다.
+  - kordoc 4.18.2 → 4.24.8(고정 판 유지). kordoc 4.24.8 은 zod 4 로 옮겨 zod 3 을 더 끌고 오지 않는다. 쓰는 API(`parse(buffer, { ocr: false })`, `ParseResult`·`FileType` 타입)는 그대로이고, 선택 의존성 없이 설치한 환경의 별표 파싱(`verify:annex-runtime`)을 통과했다
+  - zod 4.6.2 → 4.6.7(GHSA-mrhx-c7xc-m3w5, 4.6.6 미만 대상)
+  - 개발용 vitest 4.1.11 → 4.1.12(@vitest/mocker 권고 2건), 하위 의존성 body-parser·fast-uri·hono·ip-address·markdown-it·vite 를 `npm audit fix` 로 수정판으로
+  - 테스트 1,380건 통과, `npm audit` 0건
+
 ## [4.15.13] - 2026-10-25
 
 ### Changed
