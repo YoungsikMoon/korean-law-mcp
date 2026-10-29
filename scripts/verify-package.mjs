@@ -106,6 +106,12 @@ export function verifyPackageArtifacts() {
   for (const plugin of marketplaceJson.plugins) {
     assert(plugin.version === packageJson.version, `.claude-plugin/marketplace.json ${plugin.name} version ${plugin.version} ≠ package.json ${packageJson.version}`)
   }
+  // 디렉터리 제출본은 plugins/korean-law(레포 맨 위에 두면 package-lock 때문에 "lockfile 설치"로 보류).
+  // 맨 위 사본은 옛 제출을 거둘 때까지 남긴다: 두 사본이 갈라지지 않게 글자 그대로 같아야 한다
+  for (const rel of [".claude-plugin/plugin.json", ".claude-plugin/icon.png", "skills/korean-law/SKILL.md"]) {
+    const a = readFileSync(resolve(root, rel)), b = readFileSync(resolve(root, "plugins/korean-law", rel))
+    assert(a.equals(b), `plugins/korean-law/${rel} must match ${rel}`)
+  }
 
   const allowedTopLevel = new Set(["README.md", "LICENSE", "NOTICE", "package.json"])
   const files = packedFiles()
