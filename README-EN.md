@@ -36,7 +36,7 @@ If this saves you time, a GitHub ⭐ helps others find it.
 
 | Connect to Claude | Connect to ChatGPT |
 |:---:|:---:|
-| [![Connect to Claude](./docs/video-claude.jpg)](https://youtu.be/KaUKLOH7290) | [![Connect to ChatGPT](./docs/video-gpt.jpg)](https://youtu.be/RzoU_6v9sgo) |
+| [![Connect to Claude](./docs/video-claude.jpg)](https://youtu.be/KaUKLOH7290) | [![Connect to ChatGPT](./docs/video-gpt.jpg)](https://youtu.be/-qMk-ajW-GQ) |
 
 ---
 
@@ -479,7 +479,7 @@ MCP_HTTP_HOST=0.0.0.0 TRUST_PROXY=1 MCP_AUTH_TOKEN=replace-with-a-secret \
 ## FAQ
 
 **How do I search Korean statutes and court precedents from Claude or ChatGPT?**
-Connect this MCP server. In Claude.ai, add `https://mcp.gomdori.app/law?oc=YOUR_KEY` as a custom connector. For Claude Desktop, Cursor, Windsurf and Zed see [Quick Start](#quick-start); for ChatGPT see the [connection video](https://youtu.be/RzoU_6v9sgo) (Korean narration).
+Connect this MCP server. In Claude.ai, add `https://mcp.gomdori.app/law?oc=YOUR_KEY` as a custom connector. For Claude Desktop, Cursor, Windsurf and Zed see [Quick Start](#quick-start); for ChatGPT see the [connection video](https://youtu.be/-qMk-ajW-GQ) (in Korean).
 
 **Is it free?**
 Yes. The code is MIT-licensed, and the 법제처 Open API key it needs is free ([open.law.go.kr](https://open.law.go.kr/LSO/openApi/guideResult.do)).
