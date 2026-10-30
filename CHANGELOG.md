@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.15.15] - 2026-10-31
+
+### Changed
+
+- 별표 파서 kordoc 4.24.8 → 4.24.25(고정 판 유지). 별표 파싱에 닿는 것은 PDF 표 수정이다: 쪽에서 갈린 행의 띠를 앞 행에 합쳐 빈 행이 하나 더 생기던 것, 표 위 "(단위 : …)" 줄을 표 첫 행으로 붙이던 것. 나머지는 렌더·패치·OCR 쪽이라 이 서버는 쓰지 않는다. 쓰는 API(`parse(buffer, { ocr: false })`, `ParseResult`·`FileType`)는 그대로다
+  - 실제 별표 3건(소방시설법 시행령 별표 4·별표 10 HWP, 광진구 지방공무원 복무 조례 별표 5 HWPX)을 4.24.8 과 4.24.25 로 뽑아 바이트 단위로 같았다. 선택 의존성 없이 설치한 환경의 별표 파싱(`verify:annex-runtime`) 통과
+
+### Security
+
+- `@hono/node-server` 2.1.1 → 2.1.5(GHSA-rmxm-3fg6-px4f, `serveStatic` 경로 이중 디코딩, moderate). MCP SDK 를 통해 들어오는 하위 의존성이다. `npm audit` 1건 → 0건
+- 테스트 1,380건 통과
+
 ## [4.15.14] - 2026-10-26
 
 ### Security
